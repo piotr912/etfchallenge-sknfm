@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jak inwestować w ETF – SKN Finansów i Makroekonomii</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f4f4f4; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 1rem; font-family: 'Segoe UI', sans-serif; }
+#game { max-width: 700px; width: 100%; }
+.comic-panel { border: 4px solid #1a1a2e; border-radius: 12px; background: #fff; overflow: hidden; margin-bottom: 0.8rem; }
+.panel-header { background: #1a1a2e; color: #FFD700; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; }
+.panel-scene { padding: 1rem; background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%); }
+.character-bubble { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.8rem; }
+.avatar { width: 52px; height: 52px; border-radius: 50%; border: 3px solid #1a1a2e; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 26px; background: #fff; }
+.speech-bubble { background: #fff; border: 3px solid #1a1a2e; border-radius: 14px; padding: 8px 12px; position: relative; font-size: 14px; line-height: 1.5; color: #1a1a2e; flex: 1; }
+.speech-bubble::before { content:''; position:absolute; left:-14px; top:16px; border:7px solid transparent; border-right-color:#1a1a2e; }
+.speech-bubble::after { content:''; position:absolute; left:-8px; top:17px; border:6px solid transparent; border-right-color:#fff; }
+.narrator-box { background: #FFD700; border: 3px solid #1a1a2e; border-radius: 8px; padding: 6px 10px; font-size: 13px; font-weight: 600; color: #1a1a2e; margin-bottom: 0.6rem; font-style: italic; }
+.info-box { background: #e8f4fd; border-left: 5px solid #378ADD; border-radius: 0 8px 8px 0; padding: 8px 12px; margin: 0.6rem 0; font-size: 13px; color: #185FA5; line-height: 1.5; }
+.info-box strong { color: #0C447C; }
+.warning-box { background: #FAEEDA; border-left: 5px solid #EF9F27; border-radius: 0 8px 8px 0; padding: 8px 12px; margin: 0.6rem 0; font-size: 13px; color: #633806; line-height: 1.5; }
+.danger-box { background: #FCEBEB; border-left: 5px solid #E24B4A; border-radius: 0 8px 8px 0; padding: 8px 12px; margin: 0.6rem 0; font-size: 13px; color: #501313; line-height: 1.5; }
+.success-box { background: #EAF3DE; border-left: 5px solid #639922; border-radius: 0 8px 8px 0; padding: 8px 12px; margin: 0.6rem 0; font-size: 13px; color: #173404; line-height: 1.5; }
+.choices { padding: 0.8rem 1rem 1rem; background: #f0f0f0; border-top: 3px dashed #1a1a2e; }
+.choice-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 6px; }
+.choice-btn { background: #fff; border: 3px solid #1a1a2e; border-radius: 10px; padding: 9px 14px; font-size: 14px; font-weight: 600; color: #1a1a2e; cursor: pointer; text-align: left; width: 100%; margin-bottom: 6px; display: block; font-family: 'Segoe UI', sans-serif; line-height: 1.4; transition: background 0.1s, transform 0.1s; }
+.choice-btn:hover:not(:disabled) { background: #FFD700; transform: translateX(4px); }
+.choice-btn:disabled { cursor: default; }
+.continue-btn { background: #1a1a2e; color: #FFD700; border: none; border-radius: 12px; padding: 12px 20px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 8px; font-family: 'Segoe UI', sans-serif; display: block; }
+.continue-btn:hover { opacity: 0.85; }
+.back-btn { background: transparent; color: #888; border: 2px solid #ccc; border-radius: 12px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 6px; font-family: 'Segoe UI', sans-serif; display: block; }
+.back-btn:hover { border-color: #1a1a2e; color: #1a1a2e; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 1rem; }
+.hero-card { border: 4px solid #1a1a2e; border-radius: 14px; background: #fff; padding: 1.2rem 1rem; text-align: center; cursor: pointer; transition: all 0.15s; }
+.hero-card:hover { background: #FFD700; transform: scale(1.04); }
+.hero-emoji { font-size: 48px; display: block; margin-bottom: 6px; line-height: 1; }
+.hero-name { font-size: 20px; font-weight: 800; color: #1a1a2e; }
+.hero-desc { font-size: 12px; color: #555; margin-top: 3px; }
+.score-display { display: flex; align-items: center; justify-content: space-between; background: #1a1a2e; color: #FFD700; border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 700; margin-bottom: 0.6rem; }
+.badge { background: #1a1a2e; color: #FFD700; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 700; display: inline-block; margin: 2px; }
+.badge-row { display: flex; justify-content: center; flex-wrap: wrap; margin: 0.6rem 0; }
+.pv-bar { flex: 1; border-radius: 4px 4px 0 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2px; font-size: 9px; font-weight: 700; color: #fff; font-family: 'Segoe UI', sans-serif; }
+.portfolio-vis { display: flex; gap: 4px; align-items: flex-end; height: 55px; margin: 6px 0; }
+.game-title { text-align: center; padding: 1rem 1rem 0.5rem; }
+.game-title h1 { font-size: 26px; font-weight: 900; color: #1a1a2e; line-height: 1.2; }
+.progress-wrap { margin-bottom: 0.8rem; }
+.progress-label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: #888; margin-bottom: 4px; }
+.progress-track { background: #e0e0e0; border-radius: 20px; height: 32px; border: 2px solid #1a1a2e; position: relative; overflow: visible; }
+.progress-fill { background: linear-gradient(90deg, #3B6D11, #639922); border-radius: 20px; height: 100%; transition: width 0.6s ease; position: relative; min-width: 0; }
+.progress-bull-wrap { position: absolute; right: -20px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+#screen-intro { background: #1a1a2e; border-radius: 16px; padding: 1.5rem 1rem; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; margin-bottom: 0.8rem; }
+.intro-figure { opacity: 0; transform: translateY(30px); transition: opacity 1s ease, transform 1s ease; }
+.intro-figure.visible { opacity: 1; transform: translateY(0); }
+.intro-tagline { opacity: 0; transition: opacity 0.8s ease 1.2s; text-align: center; margin-top: 12px; }
+.intro-tagline.visible { opacity: 1; }
+.intro-start-btn { opacity: 0; transition: opacity 0.6s ease 2s; margin-top: 18px; }
+.intro-start-btn.visible { opacity: 1; }
+</style>
+</head>
+<body>
+<div id="game">
+  <div id="score-bar" style="display:none;">
+    <div class="score-display">
+      <span id="hero-label">&#128104;&#8205;&#128188; Adam</span>
+      <span>Portfel: <span id="portfolio-val">1 000 000 zł</span></span>
+      <span id="chapter-label">Rozdział 1/6</span>
+    </div>
+  </div>
+  <div id="progress-wrap" class="progress-wrap" style="display:none;">
+    <div class="progress-label">
+      <span>Postęp</span>
+      <span id="prog-right">0 / 6 rozdziałów</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%;">
+        <div class="progress-bull-wrap">
+          <svg width="38" height="32" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1);">
+            <defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFE066"/><stop offset="50%" style="stop-color:#FFD700"/><stop offset="100%" style="stop-color:#C8A400"/></linearGradient></defs>
+            <ellipse cx="62" cy="58" rx="32" ry="22" fill="url(#bg)"/>
+            <ellipse cx="38" cy="46" rx="16" ry="18" fill="url(#bg)" transform="rotate(-20 38 46)"/>
+            <ellipse cx="22" cy="34" rx="14" ry="12" fill="url(#bg)" transform="rotate(-30 22 34)"/>
+            <ellipse cx="10" cy="38" rx="8" ry="6" fill="url(#bg)" transform="rotate(-10 10 38)"/>
+            <circle cx="20" cy="28" r="2.5" fill="#1a1a2e"/><circle cx="21" cy="27" r="1" fill="#fff" opacity="0.6"/>
+            <path d="M18 22 Q8 8 14 2 Q20 10 22 20Z" fill="url(#bg)" stroke="#C8A400" stroke-width="0.5"/>
+            <path d="M28 20 Q22 6 28 1 Q32 10 30 20Z" fill="#C8A400" opacity="0.7"/>
+            <ellipse cx="52" cy="40" rx="14" ry="12" fill="url(#bg)"/>
+            <ellipse cx="88" cy="54" rx="18" ry="16" fill="url(#bg)"/>
+            <path d="M104 48 Q114 38 110 28 Q108 34 106 36 Q112 28 108 20" stroke="url(#bg)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M44 72 Q40 82 36 92 Q38 93 42 92 Q44 82 48 74Z" fill="url(#bg)"/>
+            <path d="M54 74 Q52 84 50 94 Q52 95 56 94 Q56 84 58 74Z" fill="url(#bg)"/>
+            <path d="M74 74 Q72 84 70 94 Q72 95 76 94 Q76 84 78 74Z" fill="url(#bg)"/>
+            <path d="M86 70 Q86 80 84 90 Q86 91 90 90 Q90 80 90 70Z" fill="url(#bg)"/>
+            <ellipse cx="65" cy="74" rx="28" ry="5" fill="#C8A400" opacity="0.3"/>
+            <ellipse cx="32" cy="26" rx="5" ry="7" fill="url(#bg)" transform="rotate(20 32 26)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="slide-container"></div>
+</div>
+
+<script>
+var CHAPTER_COUNT = 6;
+var hero = 'adam', heroEmoji = '👨‍💼', portfolio = 1000000, score = 0;
+var answers = {}, earnedBadges = {}, chapterSceneStep = {}, chapterShuffledChoices = {};
+
+var PW = '<div class="avatar" style="overflow:hidden;padding:0;"><svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" width="52" height="52"><circle cx="26" cy="26" r="26" fill="#fff"/><ellipse cx="14" cy="30" rx="3.5" ry="4.5" fill="#F5C89A" stroke="#1a1a2e" stroke-width="0.8"/><ellipse cx="38" cy="30" rx="3.5" ry="4.5" fill="#F5C89A" stroke="#1a1a2e" stroke-width="0.8"/><ellipse cx="26" cy="31" rx="12" ry="13" fill="#F5C89A" stroke="#1a1a2e" stroke-width="1"/><ellipse cx="22" cy="28" rx="2.8" ry="3.2" fill="#fff" stroke="#1a1a2e" stroke-width="0.7"/><ellipse cx="30" cy="28" rx="2.8" ry="3.2" fill="#fff" stroke="#1a1a2e" stroke-width="0.7"/><circle cx="22" cy="29" r="1.6" fill="#3a2010"/><circle cx="30" cy="29" r="1.6" fill="#3a2010"/><circle cx="22" cy="29" r="0.9" fill="#111"/><circle cx="30" cy="29" r="0.9" fill="#111"/><circle cx="22.8" cy="28.2" r="0.5" fill="#fff"/><circle cx="30.8" cy="28.2" r="0.5" fill="#fff"/><path d="M18.5 25 Q22 23 25 25" stroke="#5a3010" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M27 25 Q30 23 33.5 25" stroke="#5a3010" stroke-width="1.1" fill="none" stroke-linecap="round"/><circle cx="30" cy="28" r="4.5" fill="none" stroke="#FFD700" stroke-width="0.9"/><line x1="34.5" y1="31.5" x2="36" y2="34" stroke="#FFD700" stroke-width="0.9"/><ellipse cx="18" cy="33" rx="3.5" ry="2" fill="#F4A0A0" opacity="0.3"/><ellipse cx="34" cy="33" rx="3.5" ry="2" fill="#F4A0A0" opacity="0.3"/><path d="M20 34.5 Q23 37.5 26 35.5 Q29 37.5 32 34.5" fill="#6B3A1F" stroke="#4a2810" stroke-width="0.5" stroke-linejoin="round"/><path d="M22.5 39 Q26 42 29.5 39" stroke="#1a1a2e" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M14 44 Q18 40 22 42 L22 52 L14 52 Z" fill="#fff" stroke="#1a1a2e" stroke-width="0.6"/><path d="M38 44 Q34 40 30 42 L30 52 L38 52 Z" fill="#fff" stroke="#1a1a2e" stroke-width="0.6"/><path d="M14 44 Q18 40 26 42 Q34 40 38 44 L39 52 L13 52 Z" fill="#1a1a2e" stroke="#1a1a2e" stroke-width="0.4"/><path d="M14 44 Q18 40 22 42 L21 52 L13 52 Z" fill="#2a2a4e"/><path d="M38 44 Q34 40 30 42 L31 52 L39 52 Z" fill="#2a2a4e"/><path d="M23 42 L25.5 44.5 L23 47 Q21.5 44.5 23 42Z" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.3"/><path d="M29 42 L26.5 44.5 L29 47 Q30.5 44.5 29 42Z" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.3"/><circle cx="26" cy="44.5" r="1.8" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.3"/><ellipse cx="26" cy="21" rx="15" ry="4" fill="#111" stroke="#333" stroke-width="0.8"/><rect x="14.5" y="4" width="23" height="18" rx="2" fill="#111" stroke="#2a2a2a" stroke-width="0.8"/><ellipse cx="26" cy="4" rx="11.5" ry="3" fill="#1a1a1a" stroke="#333" stroke-width="0.8"/><rect x="14.5" y="17.5" width="23" height="3.5" rx="0" fill="#222" stroke="#444" stroke-width="0.5"/><ellipse cx="20" cy="9" rx="4" ry="1.5" fill="#2a2a2a" opacity="0.4"/></svg></div>';
+
+var chapters = [
+  { id:'r1', title:'Czym jest ETF?', emoji:'📦',
+    sceneSteps: function(h,he) {
+      var kupil = h==='Adam'?'kupił':'kupiła', kolega = h==='Adam'?'Kolega mówi':'Koleżanka mówi';
+      return [
+        '<div class="narrator-box">Kawiarnia „Bessa &amp; Hossa", wtorek, 9:17</div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">Mam milion od cioci z Ameryki. '+kolega+', żebym '+kupil+' ETF. Co to w ogóle jest?!</div></div>',
+        '<div class="character-bubble"><div class="avatar" style="overflow:hidden;padding:0;"><svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" width="52" height="52"><circle cx="26" cy="26" r="26" fill="#fff"/><ellipse cx="14" cy="30" rx="3.5" ry="4.5" fill="#F5C89A" stroke="#1a1a2e" stroke-width="0.8"/><ellipse cx="38" cy="30" rx="3.5" ry="4.5" fill="#F5C89A" stroke="#1a1a2e" stroke-width="0.8"/><ellipse cx="26" cy="31" rx="12" ry="13" fill="#F5C89A" stroke="#1a1a2e" stroke-width="1"/><ellipse cx="22" cy="28" rx="2.8" ry="3.2" fill="#fff" stroke="#1a1a2e" stroke-width="0.7"/><ellipse cx="30" cy="28" rx="2.8" ry="3.2" fill="#fff" stroke="#1a1a2e" stroke-width="0.7"/><circle cx="22" cy="29" r="1.6" fill="#3a2010"/><circle cx="30" cy="29" r="1.6" fill="#3a2010"/><circle cx="22" cy="29" r="0.9" fill="#111"/><circle cx="30" cy="29" r="0.9" fill="#111"/><circle cx="22.8" cy="28.2" r="0.5" fill="#fff"/><circle cx="30.8" cy="28.2" r="0.5" fill="#fff"/><path d="M18.5 25 Q22 23 25 25" stroke="#5a3010" stroke-width="1.1" fill="none" stroke-linecap="round"/><path d="M27 25 Q30 23 33.5 25" stroke="#5a3010" stroke-width="1.1" fill="none" stroke-linecap="round"/><circle cx="30" cy="28" r="4.5" fill="none" stroke="#FFD700" stroke-width="0.9"/><line x1="34.5" y1="31.5" x2="36" y2="34" stroke="#FFD700" stroke-width="0.9"/><ellipse cx="18" cy="33" rx="3.5" ry="2" fill="#F4A0A0" opacity="0.3"/><ellipse cx="34" cy="33" rx="3.5" ry="2" fill="#F4A0A0" opacity="0.3"/><path d="M20 34.5 Q23 37.5 26 35.5 Q29 37.5 32 34.5" fill="#6B3A1F" stroke="#4a2810" stroke-width="0.5" stroke-linejoin="round"/><path d="M22.5 39 Q26 42 29.5 39" stroke="#1a1a2e" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M14 44 Q18 40 22 42 L22 52 L14 52 Z" fill="#fff" stroke="#1a1a2e" stroke-width="0.6"/><path d="M38 44 Q34 40 30 42 L30 52 L38 52 Z" fill="#fff" stroke="#1a1a2e" stroke-width="0.6"/><path d="M14 44 Q18 40 26 42 Q34 40 38 44 L39 52 L13 52 Z" fill="#1a1a2e" stroke="#1a1a2e" stroke-width="0.4"/><path d="M14 44 Q18 40 22 42 L21 52 L13 52 Z" fill="#2a2a4e"/><path d="M38 44 Q34 40 30 42 L31 52 L39 52 Z" fill="#2a2a4e"/><path d="M23 42 L25.5 44.5 L23 47 Q21.5 44.5 23 42Z" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.3"/><path d="M29 42 L26.5 44.5 L29 47 Q30.5 44.5 29 42Z" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.3"/><circle cx="26" cy="44.5" r="1.8" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.3"/><ellipse cx="26" cy="21" rx="15" ry="4" fill="#111" stroke="#333" stroke-width="0.8"/><rect x="14.5" y="4" width="23" height="18" rx="2" fill="#111" stroke="#2a2a2a" stroke-width="0.8"/><ellipse cx="26" cy="4" rx="11.5" ry="3" fill="#1a1a1a" stroke="#333" stroke-width="0.8"/><rect x="14.5" y="17.5" width="23" height="3.5" rx="0" fill="#222" stroke="#444" stroke-width="0.5"/><ellipse cx="20" cy="9" rx="4" ry="1.5" fill="#2a2a2a" opacity="0.4"/></svg></div><div class="speech-bubble">ETF to jak <strong>koszyk zakupów</strong> — zamiast jednej akcji kupujesz kawałek setek spółek naraz. Do tego możesz handlować nim na giełdzie jak akcjami!</div></div>',
+        '<div class="info-box"><strong>ETF w skrócie:</strong> Fundusz notowany na giełdzie, śledzący indeks (np. S&amp;P 500 = 500 największych firm USA), instrument, obligacje lub kompozycję produktów. Jeden zakup = ekspozycja na cały rynek!</div>'
+      ];
+    },
+    question: 'Kolega pyta: „ETF na S&amp;P 500 — czym to w ogóle jest?"',
+    choices: [
+      { text:'🏦 Lokata bankowa z wyższym oprocentowaniem', correct:false, explanation:'ETF to nie lokata, lecz rodzaj fundusz inwestycyjnego, notowanego na giełdzie.' },
+      { text:'🛒 To jakby kupić po kawałku 500 największych firm z USA naraz', correct:true, explanation:'Dokładnie! S&P 500 ETF daje ekspozycję na 500 największych spółek, takie jak Apple, Microsoft czy Amazon. Gotowy zdywersyfikowany portfel!' },
+      { text:'🎰 Zakład na jedną konkretną spółkę', correct:false, explanation:'To byłby zakup akcji jednej spółki. ETF to wręcz przeciwnie — inwestujesz w setki spółek naraz!' }
+    ], badge:'🎓 Znawca ETF' },
+
+
+  { id:'r2', title:'Czym jest dywidenda?', emoji:'💵',
+    sceneSteps: function(h,he) {
+      var slyszalem = h==='Adam'?'słyszałem':'słyszałam';
+      return [
+        '<div class="narrator-box">Kawiarnia „Bessa &amp; Hossa", wtorek, 9:45</div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">Jeszcze jedno pojęcie obiło mi się o uszy. Ostatnio '+slyszalem+' coś o dywidendach — co to takiego?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">Dywidenda to część <strong>zysku spółki</strong>, którą zarząd może zdecydować się wypłacić akcjonariuszom. Jeśli posiadasz akcje Apple i Apple zarobi krocie, spółka może podzielić się zyskiem w formie dywidendy — ale nie musi.</div></div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">Może, ale nie musi? To znaczy, że dywidenda nie jest pewna?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">Dokładnie. Dywidendy <strong>nigdy nie są gwarantowane</strong>. Spółka może podjąć decyzję o zawieszeniu wypłaty, jej zmniejszeniu lub całkowitym zaprzestaniu — na przykład gdy chce przeznaczyć zyski na własny rozwój. To ważne ryzyko, o którym inwestorzy często zapominają.</div></div>',
+        '<div class="warning-box">⚠️ <strong>Ważne ryzyko:</strong> Dywidendy nigdy nie są gwarantowane. Spółki mogą w każdej chwili podjąć decyzję o zawieszeniu, zmniejszeniu lub zaprzestaniu ich wypłaty.</div>'
+      ];
+    },
+    question: 'Spółki w Twoim ETF-ie wypracowały w tym roku duże zyski. Czego możesz się spodziewać?',
+    choices: [
+      { text:'💰 Na pewno otrzymasz dywidendę — zyski muszą trafić do akcjonariuszy', correct:false, explanation:'Nieprawda. Dywidendy nie są obowiązkowe — spółka może zysk zatrzymać na własny rozwój, spłatę długów lub inne cele. Decyzja należy do walnego zgromadzenia spółki' },
+      { text:'🤔 Spółki mogą wypłacić dywidendę, ale nie muszą — to ich decyzja', correct:true, explanation:'Dokładnie! Dywidendy nigdy nie są gwarantowane. Nawet przy świetnych wynikach spółka może zdecydować o reinwestycji zysku zamiast jego wypłaty. Zawsze traktuj dywidendy jako możliwość, nie pewność.' },
+      { text:'📈 Zyski spółek automatycznie zwiększają wartość ETF-u o tę samą kwotę co dywidenda', correct:false, explanation:'Niekoniecznie. Wzrost zysku spółki może wpłynąć na cenę jej akcji, ale nie przekłada się automatycznie na wypłatę dywidendy ani proporcjonalny wzrost wartości ETF-u.' }
+    ], badge:'💵 Znawca Dywidend' },
+
+  { id:'r2b', title:'Polityki dywidendowe ETF-ów', emoji:'🔀',
+    sceneSteps: function(h,he) {
+      return [
+        '<div class="narrator-box">Kawiarnia „Bessa &amp; Hossa", wtorek, 10:00</div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">A co z ETF-ami? Jeśli spółki zdecydują się wypłacić dywidendy — co fundusz z nimi robi?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">To zależy od tego, jaką politykę dywidendową przyjął dany fundusz. Istnieją dwa podejścia: <strong>akumulacyjna (Acc)</strong> i <strong>dystrybucyjna (Dist)</strong> — i każdy ETF jasno informuje, które stosuje, już w swojej nazwie.</div></div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">W nazwie? To jak to rozpoznać?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">Bardzo prosto! Szukaj skrótu <strong>„Acc"</strong> lub <strong>„Dist"</strong> w nazwie ETF-u. Na przykład: iShares MSCI World <strong>Acc</strong> albo Vanguard FTSE All-World <strong>Dist</strong>. Te dwa skróty to klucz do zrozumienia, co fundusz zrobi z dywidendami — ale o tym, co każdy z nich oznacza, dowiesz się w kolejnych rozdziałach!</div></div>',
+        '<div class="info-box"><strong>Dwie polityki dywidendowe ETF-ów:</strong><br><br>🔄 <strong>Acc</strong> (od ang. <em>Accumulating</em> — akumulacyjna)<br><br>💸 <strong>Dist</strong> (od ang. <em>Distributing</em> — dystrybucyjna)<br><br>🔍 <strong>Jak rozpoznać?</strong> Szukaj skrótu w nazwie ETF-u: <strong>„Acc"</strong> lub <strong>„Dist"</strong> (np. iShares MSCI World <strong>Acc</strong>, Vanguard FTSE All-World <strong>Dist</strong>).<br><br>Czym różnią się te dwa podejścia? O tym w następnych rozdziałach!</div>'
+      ];
+    },
+    question: 'Przeglądasz listę ETF-ów. Chcesz wiedzieć, jak dany fundusz obsługuje dywidendy. Na co zwrócisz uwagę?',
+    choices: [
+      { text:'📊 Na wielkość funduszu — większe fundusze zawsze wypłacają dywidendy', correct:false, explanation:'Wielkość funduszu nie mówi nic o polityce dywidendowej. Należy szukać skrótu "Acc" lub "Dist" w nazwie ETF-u.' },
+      { text:'🔍 Na skrót „Acc" lub „Dist" w nazwie ETF-u', correct:true, explanation:'Dokładnie! To najprostszy sposób. "Acc" i "Dist" w nazwie funduszu jednoznacznie określają jego politykę dywidendową. Więcej o tym, co każdy skrót oznacza, dowiesz się w kolejnych rozdziałach.' },
+      { text:'🏦 Na nazwę banku, który go wydał — każdy bank ma inną politykę', correct:false, explanation:'Emitent funduszu nie decyduje o polityce dywidendowej w taki sposób. Każdy ETF ma swoją politykę określoną indywidualnie i oznaczoną skrótem "Acc" lub "Dist" w nazwie.' }
+    ], badge:'🔀 Znawca Polityk' },
+
+  { id:'r3', title:'Polityka akumulacyjna (Acc)', emoji:'🔄',
+    sceneSteps: function(h,he) {
+      return [
+        '<div class="narrator-box">Kawiarnia „Bessa &amp; Hossa", wtorek, 10:00</div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">To opowiedz mi najpierw o tej polityce akumulacyjnej. Jak to dokładnie działa?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">W ETF-ie <strong>Accumulating</strong> fundusz zbiera dywidendy od spółek i od razu kupuje za nie kolejne akcje tych samych spółek. Twoja jednostka ETF-u rośnie w wartości, ale żadna gotówka nie ląduje na Twoim koncie.</div></div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">A podatki? Czy od tych reinwestowanych dywidend też muszę płacić podatek?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">I tu jest magia! Przy Acc w Polsce <strong>nie płacisz podatku na bieżąco</strong>. Dywidendy są reinwestowane zanim w ogóle trafią do Ciebie, a podatek 19% opłacisz dopiero w momencie sprzedaży jednostek ETF-u. Procent składany działa na pełnej kwocie!</div></div>',
+        '<div class="info-box"><strong>Przykład — siła akumulacji przez 20 lat</strong><br><br>💰 Inwestujesz <strong>100 000 zł</strong> w ETF Acc ze stopą zwrotu 8% rocznie (w tym 2% z dywidend).<br><br>📈 Po 20 latach: <strong>≈ 466 000 zł</strong><br><br>⚙️ Cały czas pracuje pełna kwota, ponieważ żaden podatek nie uszczupli podstawy w trakcie inwestycji.<br><br>✅ <strong>Zalety Acc:</strong><br>• Brak podatku Belki od dywidend na bieżąco<br>• Automatyczne reinwestowanie<br>• Pełna siła procenta składanego<br>• Brak konieczności rozliczania dywidend w PIT-38 (w przypadku spółek zagranicznych)</div>'
+      ];
+    },
+    question: 'Dlaczego ETF akumulacyjny (Acc) jest korzystny podatkowo dla inwestora długoterminowego?',
+    choices: [
+      { text:'📆 Podatek od dywidend płacisz dopiero przy sprzedaży jednostek, nie co roku', correct:true, explanation:'Tak! Przy Acc dywidendy są reinwestowane wewnątrz funduszu. Nie trafiają do Ciebie, więc nie powstaje obowiązek podatkowy.' },
+      { text:'🚫 ETF-y Acc są całkowicie zwolnione z podatku', correct:false, explanation:'Niestety nie! Przy sprzedaży jednostek ETF Acc zapłacisz 19% podatku od całego zysku. Korzyść polega na odroczeniu podatku i reinwestowaniu pełnej kwoty przez lata.' },
+      { text:'💸 Acc wypłaca dywidendy, ale w niższej stawce podatkowej', correct:false, explanation:'Acc w ogóle nie wypłaca dywidend, stąd jego przewaga. Fundusz reinwestuje je automatycznie, a Ty nie rozliczasz ich co roku w PIT-38.' }
+    ], badge:'🔄 Mistrz Akumulacji' },
+
+  { id:'r4', title:'Polityka dystrybucyjna (Dist)', emoji:'💸',
+    sceneSteps: function(h,he) {
+      return [
+        '<div class="narrator-box">Kawiarnia „Bessa &amp; Hossa", wtorek, 10:15</div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">A co z tą polityką dystrybucyjną? Kiedy miałoby sens wybranie Dist zamiast Acc?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">ETF <strong>Distributing</strong> regularnie, co kwartał lub rok, przelewa dywidendy zebrane od spółek bezpośrednio na Twoje konto. Brzmi kusząco, ale jest pewien haczyk...</div></div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">Domyślam się... Chodzi o podatek Belki?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">Właśnie! Każda wypłata dywidendy to od razu <strong>19% podatku</strong>. Poza tym musisz samodzielnie zdecydować, co zrobić z gotówką na koncie. Jeśli chcesz reinwestować, kupujesz jednostki ręcznie, co powoduje powstanie dodatkowych kosztów transakcyjnych i straty czasu. Dist ma sens głównie gdy <strong>potrzebujesz regularnego dochodu</strong>, np. na emeryturze.</div></div>',
+        '<div class="info-box"><strong>Przykład — koszt dystrybucji przez 20 lat</strong><br><br>💰 Inwestujesz <strong>100 000 zł</strong> w ETF Dist ze stopą zwrotu 8% rocznie (w tym 2% z dywidend).<br><br>📉 Co roku 2% dywidend = 2 000 zł, z czego <strong>380 zł idzie do fiskusa</strong> (19%). Reinwestujesz tylko 1 620 zł.<br><br>📈 Po 20 latach: <strong>≈ 430 000 zł</strong> (ok. 36 000 zł mniej niż Acc!)<br><br>✅ <strong>Kiedy Dist ma sens?</strong><br>• Potrzebujesz regularnego dochodu pasywnego<br>• Jesteś na emeryturze i żyjesz z dywidend<br>• Twoja strategia zakłada wydatkowanie dywidend, nie reinwestycję</div>'
+      ];
+    },
+    question: 'Inwestor wybiera ETF Dist zamiast Acc i po roku otrzymuje 3 000 zł dywidendy. Ile realnie zostaje mu po podatku?',
+    choices: [
+      { text:'💰 2 430 zł — po potrąceniu 19% podatku Belki (570 zł)', correct:true, explanation:'Dokładnie! 19% z 3 000 zł = 570 zł podatku. Do portfela trafia 2 430 zł, które inwestor musi jeszcze samodzielnie reinwestować.' },
+      { text:'💰 3 000 zł — dywidendy z ETF-ów są zwolnione z podatku', correct:false, explanation:'Niestety nie. Dywidendy z ETF-ów Dist podlegają podatkowi Belki (19%) w Polsce, tak samo jak dywidendy z akcji.' },
+      { text:'💰 1 500 zł — podatek od dywidend z zagranicznych ETF-ów wynosi 50%', correct:false, explanation:'Podatek Belki w Polsce wynosi 19%, nie 50%. Od 3 000 zł dywidendy zapłacisz 570 zł podatku, zostaje 2 430 zł.' }
+    ], badge:'💸 Mistrz Dystrybucji' },
+
+  { id:'r5', title:'Acc vs Dist — pojedynek', emoji:'⚔️',
+    sceneSteps: function(h,he) {
+      return [
+        '<div class="narrator-box">Kawiarnia „Bessa &amp; Hossa", wtorek, 10:30</div>',
+        '<div class="character-bubble"><div class="avatar">'+he+'</div><div class="speech-bubble">No dobra, chyba rozumiem. Zrób mi szybkie podsumowanie: kiedy wybrać Acc, a kiedy Dist?</div></div>',
+        '<div class="character-bubble">'+PW+'<div class="speech-bubble">Proszę bardzo! To zależy od Twojego celu. Akumulujesz majątek na przyszłość? <strong>Acc wygrywa</strong> ze względu na podatek odroczony, zero wysiłku i pełną siłę procenta składanego. Potrzebujesz gotówki teraz i regularnie? <strong>Dist bywa lepszy</strong>, ponieważ dostajesz przelewy bez konieczności sprzedaży jednostek.</div></div>',
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0.6rem 0;">'
+        + '<div style="background:#EAF3DE;border:2px solid #639922;border-radius:8px;padding:10px;font-size:12px;color:#173404;">'
+        + '<div style="font-weight:700;font-size:13px;margin-bottom:6px;">🔄 Acc — dla kogo?</div>'
+        + '✅ Inwestor długoterminowy<br>'
+        + '✅ Budowanie majątku<br>'
+        + '✅ Chcesz unikać podatku na bieżąco<br>'
+        + '✅ Cenisz wygodę i automatyzację<br>'
+        + '✅ Nie potrzebujesz gotówki teraz'
+        + '</div>'
+        + '<div style="background:#FCEBEB;border:2px solid #E24B4A;border-radius:8px;padding:10px;font-size:12px;color:#501313;">'
+        + '<div style="font-weight:700;font-size:13px;margin-bottom:6px;">💸 Dist — dla kogo?</div>'
+        + '✅ Potrzebujesz regularnego dochodu<br>'
+        + '✅ Emerytura / dochód pasywny<br>'
+        + '✅ Chcesz przelewów bez sprzedaży<br>'
+        + '❌ Wyższe obciążenie podatkowe<br>'
+        + '❌ Konieczność ręcznego reinwestowania'
+        + '</div>'
+        + '</div>',
+        '<div class="info-box"><strong>Złota zasada:</strong> Jeśli nie masz konkretnego powodu, by wybierać Dist — wybieraj <strong>Acc</strong>. Dla większości inwestorów budujących majątek na emeryturę polityka akumulacyjna jest obiektywnie korzystniejsza: mniej podatków, mniej pracy, więcej pieniędzy na końcu inwestycji.</div>'
+      ];
+    },
+    question: 'Masz 30 lat i inwestujesz z myślą o emeryturze za 35 lat. Który typ ETF-u najprawdopodobniej da Ci lepszy wynik końcowy?',
+    choices: [
+      { text:'🔄 ETF Accumulating (Acc) — reinwestuje dywidendy automatycznie', correct:true, explanation:'Zdecydowanie Acc! Przy 35-letnim horyzoncie odroczenie podatku i automatyczne reinwestowanie dywidend może oznaczać dziesiątki tysięcy złotych więcej na koncie emerytalnym.' },
+      { text:'💸 ETF Distributing (Dist) — wypłaca dywidendy regularnie', correct:false, explanation:'Dist przy długim horyzoncie inwestycyjnym oznacza regularny podatek Belki i konieczność ręcznego reinwestowania. To kosztuje czas i pieniądze, a przede wszystkim zmniejsza efekt procenta składanego.' },
+      { text:'🤷 Nie ma różnicy — wynik będzie taki sam', correct:false, explanation:'Jest bardzo duża różnica! Przez 35 lat podatek Belki od dywidend wypłacanych co roku przy Dist może uszczuplić końcowy wynik o kilkadziesiąt tysięcy złotych względem ETF-u Acc.' }
+    ], badge:'⚔️ Dywidendowy Strateg' }
+
+];
+
+function updateProgress(done) {
+  var pw = document.getElementById('progress-wrap');
+  if (done < 0) { pw.style.display='none'; return; }
+  pw.style.display = 'block';
+  document.getElementById('progress-fill').style.width = Math.round(done/CHAPTER_COUNT*100)+'%';
+  document.getElementById('prog-right').textContent = done+' / '+CHAPTER_COUNT+' rozdziałów';
+}
+
+function getShuffled(idx) {
+  if (!chapterShuffledChoices[idx]) {
+    var arr = chapters[idx].choices.map(function(c,i){return{c:c,i:i};});
+    var s = (idx+1)*1664525+1013904223;
+    function r(){s=(s*1664525+1013904223)&0x7fffffff;return s/0x7fffffff;}
+    for(var i=arr.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}
+    chapterShuffledChoices[idx]=arr;
+  }
+  return chapterShuffledChoices[idx];
+}
+
+function renderIntro() {
+  document.getElementById('score-bar').style.display='none';
+  updateProgress(-1);
+  document.getElementById('slide-container').innerHTML=`<div id="screen-intro">
+    <svg style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%;" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="30" r="2" fill="#FFD700" opacity="0.5"/><circle cx="160" cy="15" r="1.5" fill="#FFD700" opacity="0.4"/>
+      <circle cx="300" cy="40" r="2" fill="#FFD700" opacity="0.6"/><circle cx="470" cy="25" r="1.5" fill="#FFD700" opacity="0.5"/>
+      <circle cx="560" cy="45" r="2" fill="#FFD700" opacity="0.6"/><circle cx="520" cy="360" r="2" fill="#FFD700" opacity="0.4"/>
+    </svg>
+    <div class="intro-figure" id="intro-figure">
+      <svg width="230" height="300" viewBox="0 0 230 300" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="68" cy="148" rx="9" ry="12" fill="#F5C89A" stroke="#1a1a2e" stroke-width="2"/>
+        <ellipse cx="156" cy="148" rx="9" ry="12" fill="#F5C89A" stroke="#1a1a2e" stroke-width="2"/>
+        <ellipse cx="112" cy="148" rx="44" ry="48" fill="#F5C89A" stroke="#1a1a2e" stroke-width="2.5"/>
+        <ellipse cx="97" cy="138" rx="9" ry="10" fill="#fff" stroke="#1a1a2e" stroke-width="2"/>
+        <ellipse cx="127" cy="138" rx="9" ry="10" fill="#fff" stroke="#1a1a2e" stroke-width="2"/>
+        <circle cx="97" cy="140" r="5.5" fill="#3a2010"/><circle cx="127" cy="140" r="5.5" fill="#3a2010"/>
+        <circle cx="97" cy="140" r="3" fill="#111"/><circle cx="127" cy="140" r="3" fill="#111"/>
+        <circle cx="99" cy="138" r="1.5" fill="#fff"/><circle cx="129" cy="138" r="1.5" fill="#fff"/>
+        <path d="M87 124 Q97 118 108 124" stroke="#5a3010" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M116 124 Q127 118 138 124" stroke="#5a3010" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <ellipse cx="112" cy="155" rx="7" ry="5" fill="#e8aa80" stroke="#c8845a" stroke-width="1"/>
+        <circle cx="108" cy="156" r="2.5" fill="#d4906a"/><circle cx="116" cy="156" r="2.5" fill="#d4906a"/>
+        <ellipse cx="84" cy="162" rx="12" ry="7" fill="#F4A0A0" opacity="0.35"/>
+        <ellipse cx="140" cy="162" rx="12" ry="7" fill="#F4A0A0" opacity="0.35"/>
+        <path d="M88 170 Q101 182 112 174 Q123 182 136 170" fill="#6B3A1F" stroke="#4a2810" stroke-width="1.5"/>
+        <path d="M88 170 Q96 165 106 170 Q109 168 112 174 Q115 168 118 170 Q128 165 136 170 Q127 167 112 175 Q97 167 88 170Z" fill="#7a4525"/>
+        <path d="M96 186 Q112 200 128 186" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M68 198 Q88 190 112 198 Q136 190 156 198 L162 238 L62 238 Z" fill="#fff" stroke="#1a1a2e" stroke-width="2"/>
+        <path d="M100 200 L108 208 L100 216 Q98 208 100 200Z" fill="#E24B4A" stroke="#1a1a2e" stroke-width="1"/>
+        <path d="M124 200 L116 208 L124 216 Q126 208 124 200Z" fill="#E24B4A" stroke="#1a1a2e" stroke-width="1"/>
+        <circle cx="112" cy="208" r="5" fill="#E24B4A" stroke="#1a1a2e" stroke-width="1"/>
+        <path d="M62 238 L42 300 L182 300 L162 238 Z" fill="#1a1a2e"/>
+        <path d="M62 238 Q76 250 84 238 L76 300 L42 300 Z" fill="#2a2a4e"/>
+        <path d="M162 238 Q148 250 140 238 L148 300 L182 300 Z" fill="#2a2a4e"/>
+        <path d="M144 256 L156 252 L158 264 L146 266 Z" fill="#FFD700" stroke="#1a1a2e" stroke-width="1"/>
+        <path d="M62 238 Q44 258 38 284 Q34 300 40 306" stroke="#1a1a2e" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M62 238 Q44 258 38 284 Q34 300 40 306" stroke="#2a2a4e" stroke-width="15" fill="none" stroke-linecap="round"/>
+        <ellipse cx="41" cy="309" rx="12" ry="10" fill="#F5C89A" stroke="#1a1a2e" stroke-width="2"/>
+        <path d="M162 244 Q175 235 190 226 Q200 220 203 214" stroke="#1a1a2e" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M162 244 Q175 235 190 226 Q200 220 203 214" stroke="#2a2a4e" stroke-width="15" fill="none" stroke-linecap="round"/>
+        <ellipse cx="203" cy="211" rx="15" ry="13" fill="#F5C89A" stroke="#1a1a2e" stroke-width="2.5" transform="rotate(-8 203 211)"/>
+        <ellipse cx="215" cy="203" rx="9" ry="8" fill="#F5C89A" stroke="#1a1a2e" stroke-width="2.5"/>
+        <circle cx="127" cy="138" r="13" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <line x1="140" y1="148" x2="145" y2="158" stroke="#FFD700" stroke-width="1.5"/>
+        <ellipse cx="112" cy="108" rx="56" ry="11" fill="#111" stroke="#333" stroke-width="2"/>
+        <rect x="70" y="38" width="84" height="72" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1.5"/>
+        <ellipse cx="112" cy="38" rx="42" ry="8" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+        <rect x="70" y="98" width="84" height="10" rx="0" fill="#222" stroke="#333" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="intro-tagline" id="intro-tagline">
+      <div style="color:#aaa;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">Pan Warren mówi:</div>
+      <div style="color:#fff;font-size:22px;font-weight:900;line-height:1.3;max-width:320px;font-family:'Segoe UI Black','Segoe UI',sans-serif;text-shadow:0 2px 8px rgba(0,0,0,0.5);">
+        I <span style="color:#FFD700;font-size:28px;">TY</span> możesz zostać<br>świetnym inwestorem!
+      </div>
+    </div>
+    <div class="intro-start-btn" id="intro-start-btn">
+      <button onclick="renderTitle()" style="background:#FFD700;color:#1a1a2e;border:none;border-radius:12px;padding:13px 38px;font-size:16px;font-weight:900;cursor:pointer;font-family:'Segoe UI',sans-serif;margin-top:4px;">Zaczynamy! &#8594;</button>
+    </div>
+  </div>`;
+  setTimeout(function(){
+    var f=document.getElementById('intro-figure'),t=document.getElementById('intro-tagline'),b=document.getElementById('intro-start-btn');
+    if(f)f.classList.add('visible');if(t)t.classList.add('visible');if(b)b.classList.add('visible');
+  },200);
+}
+
+var prologStep=0;
+function renderTitle(){prologStep=0;renderPrologStep();}
+function renderPrologStep(){
+  document.getElementById('score-bar').style.display='none';
+  updateProgress(-1);
+  var sc='<div class="narrator-box">Warszawa, poniedziałek rano. Przychodzi SMS...</div>';
+  if(prologStep>=1) sc+='<div class="character-bubble"><div class="avatar">📱</div><div class="speech-bubble">„Twój przelew: <strong>1 000 000 zł</strong> zaksięgowany. Nadawca: Jane Smith 💸"</div></div>';
+  if(prologStep>=2) sc+='<div class="narrator-box">Ciocia z Ameryki zostawiła Ci spadek! Co z nim zrobisz?</div>';
+  var bot='';
+  if(prologStep<2){
+    bot='<div class="choices"><button class="continue-btn" onclick="advanceProlog()">Dalej ➡️</button><button class="back-btn" onclick="renderIntro()">← Wróć do ekranu startowego</button></div>';
+  } else {
+    bot='<div class="choices"><div class="choice-label">Wybierz swojego bohatera!</div><div class="hero-grid"><div class="hero-card" onclick="selectHero(\'adam\')"><span class="hero-emoji">👨‍💼</span><div class="hero-name">Adam</div><div class="hero-desc">Przyszły świadomy inwestor</div></div><div class="hero-card" onclick="selectHero(\'ewa\')"><span class="hero-emoji">👩‍💼</span><div class="hero-name">Ewa</div><div class="hero-desc">Przyszła świadoma inwestorka</div></div></div><button class="back-btn" onclick="renderIntro()">← Wróć do ekranu startowego</button></div>';
+  }
+  document.getElementById('slide-container').innerHTML=
+    '<div class="game-title"><div style="font-size:40px;margin-bottom:4px;">📈</div><h1>Jak inwestować w ETF</h1><p style="font-size:13px;color:#555;margin-top:4px;">Interaktywny przewodnik po świecie funduszy ETF</p><div class="badge-row"><span class="badge">6 rozdziałów</span><span class="badge">moduł — polityka dywidendowa</span><span class="badge">dla początkujących</span><span class="badge">SKN Finansów i Makroekonomii</span></div></div>'
+    +'<div class="comic-panel"><div class="panel-header">⚡ Prolog</div><div class="panel-scene">'+sc+'</div>'+bot+'</div>';
+}
+function advanceProlog(){if(prologStep<2){prologStep++;renderPrologStep();}}
+
+function selectHero(h){
+  hero=h; heroEmoji=h==='adam'?'👨‍💼':'👩‍💼';
+  portfolio=1000000;score=0;answers={};earnedBadges={};chapterSceneStep={};chapterShuffledChoices={};
+  document.getElementById('hero-label').textContent=(h==='adam'?'👨‍💼 Adam':'👩‍💼 Ewa');
+  renderChapter(0);
+}
+
+function renderChapter(idx){
+  if(chapterSceneStep[idx]===undefined) chapterSceneStep[idx]=0;
+  var ch=chapters[idx];
+  var hn=hero==='adam'?'Adam':'Ewa';
+  var answered=answers[idx]!==undefined;
+  document.getElementById('score-bar').style.display='block';
+  document.getElementById('chapter-label').textContent='Rozdział '+(idx+1)+'/'+CHAPTER_COUNT;
+  document.getElementById('portfolio-val').textContent=portfolio.toLocaleString('pl-PL')+' zł';
+  updateProgress(idx);
+
+  var steps=ch.sceneSteps(hn,heroEmoji);
+  var step=answered?steps.length-1:chapterSceneStep[idx];
+  var sc=''; for(var s=0;s<=step;s++) sc+=steps[s];
+
+  var shuffled=getShuffled(idx);
+  var bot='';
+  if(!answered && step<steps.length-1){
+    bot='<div class="choices"><button class="continue-btn" onclick="advScene('+idx+')">Dalej ➡️</button>'
+      +(idx>0?'<button class="back-btn" onclick="goBack('+idx+')">← Poprzedni rozdział</button>':'<button class="back-btn" onclick="renderTitle()">← Wybór bohatera</button>')
+      +'</div>';
+  } else {
+    var chtml=shuffled.map(function(item){
+      var st='';
+      if(answered&&answers[idx]===item.i) st=item.c.correct?'background:#EAF3DE;border-color:#639922;color:#173404;':'background:#FCEBEB;border-color:#E24B4A;color:#501313;';
+      return '<button class="choice-btn" onclick="doAnswer('+idx+','+item.i+')" '+(answered?'disabled':'')+' style="'+st+'">'+item.c.text+'</button>';
+    }).join('');
+    var fb='';
+    if(answered){
+      var ch2=ch.choices[answers[idx]];
+      fb='<div class="'+(ch2.correct?'success-box':'danger-box')+'">'+(ch2.correct?'✅ <strong>Świetnie!</strong> ':'❌ <strong>Nie tym razem!</strong> ')+ch2.explanation+(ch2.correct?'<br><strong>+50 000 zł do portfela!</strong>':'<br><em>-20 000 zł... ale wiedza bezcenna!</em>')+'</div>';
+    }
+    var nav='';
+    if(answered){
+      var isLast=idx===chapters.length-1;
+      nav='<button class="continue-btn" onclick="'+(isLast?'renderEnd()':'renderChapter('+(idx+1)+')')+'">'+(isLast?'🏆 Zobacz wyniki!':'➡️ Następny rozdział')+'</button>';
+    }
+    nav+=(idx>0?'<button class="back-btn" onclick="goBack('+idx+')">← Poprzedni rozdział</button>':'<button class="back-btn" onclick="renderTitle()">← Wybór bohatera</button>');
+    bot='<div class="choices"><div class="choice-label">🤔 '+ch.question+'</div>'+chtml+fb+nav+'</div>';
+  }
+  document.getElementById('slide-container').innerHTML=
+    '<div class="comic-panel"><div class="panel-header">'+ch.emoji+' Rozdział '+(idx+1)+': '+ch.title+'</div><div class="panel-scene">'+sc+'</div>'+bot+'</div>';
+}
+
+function advScene(idx){
+  var steps=chapters[idx].sceneSteps(hero==='adam'?'Adam':'Ewa',heroEmoji);
+  if(chapterSceneStep[idx]<steps.length-1) chapterSceneStep[idx]++;
+  renderChapter(idx);
+}
+function goBack(idx){chapterSceneStep[idx-1]=undefined;renderChapter(idx-1);}
+function doAnswer(idx,choice){
+  if(answers[idx]!==undefined) return;
+  answers[idx]=choice;
+  var correct=chapters[idx].choices[choice].correct;
+  if(correct){portfolio+=50000;score++;earnedBadges[idx]=chapters[idx].badge;}
+  else portfolio-=20000;
+  renderChapter(idx);
+}
+
+function renderEnd(){
+  document.getElementById('score-bar').style.display='block';
+  document.getElementById('chapter-label').textContent='Wyniki';
+  document.getElementById('portfolio-val').textContent=portfolio.toLocaleString('pl-PL')+' zł';
+  updateProgress(CHAPTER_COUNT);
+  var pct=score/CHAPTER_COUNT, em, ti;
+  if(pct>=0.85){em='🏆';ti='Mistrz ETF-ów!';}else if(pct>=0.6){em='🎉';ti='Niezły inwestor!';}else{em='📚';ti='Jest nad czym pracować!';}
+  var badges=Object.values(earnedBadges);
+  var bhtml=badges.length>0?badges.map(function(b){return'<span class="badge">'+b+'</span>';}).join(''):'<span class="badge">🌱 Uczeń w drodze</span>';
+  var zdobyl=hero==='adam'?'Zdobyłeś':'Zdobyłaś';
+  document.getElementById('slide-container').innerHTML=
+    '<div class="comic-panel"><div class="panel-header">🏆 Koniec przygody!</div>'
+    +'<div class="panel-scene" style="text-align:center;padding:1.2rem;">'
+    +'<div style="font-size:52px;">'+em+'</div>'
+    +'<h2 style="font-size:20px;font-weight:800;color:#1a1a2e;margin:8px 0;">'+ti+'</h2>'
+    +'<div style="font-size:14px;color:#333;line-height:1.6;">'+zdobyl+' <strong>'+score+' z '+CHAPTER_COUNT+'</strong> poprawnych odpowiedzi.<br>Portfel końcowy: <strong>'+portfolio.toLocaleString('pl-PL')+' zł</strong>.<br><br>ETF-y to jedno z najlepszych narzędzi dla długoterminowych inwestorów!</div>'
+    +'<div style="margin:14px 0;padding:12px;background:#FFD700;border-radius:12px;border:3px solid #1a1a2e;"><div style="font-size:12px;font-weight:700;color:#1a1a2e;">Portfel końcowy</div><div style="font-size:26px;font-weight:900;color:#1a1a2e;">'+portfolio.toLocaleString('pl-PL')+' zł</div></div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:6px 0;">'+bhtml+'</div><div style="margin-top:1rem;padding:1rem;background:#FAEEDA;border:2px solid #EF9F27;border-radius:12px;text-align:center;"><div style="font-size:22px;margin-bottom:6px;">📌</div><div style="font-size:12px;font-weight:700;color:#633806;margin-bottom:6px;letter-spacing:0.5px;text-transform:uppercase;">Pamiętaj o ryzyku</div><div style="font-size:11px;color:#633806;line-height:1.7;text-align:justify;">Inwestowanie wiąże się z ryzykiem, w tym z możliwością utraty części lub całości zainwestowanego kapitału. ETF-y, mimo że są zdywersyfikowanym instrumentem, nie eliminują tego ryzyka. Inwestuj wyłącznie w produkty finansowe, które rozumiesz i które odpowiadają Twojej wiedzy oraz doświadczeniu inwestycyjnemu.</div></div><div style="margin-top:0.6rem;padding:1rem;background:#f8f8f8;border:2px solid #ccc;border-radius:12px;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">⚠️</div><div style="font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:6px;letter-spacing:0.5px;text-transform:uppercase;">Ważna informacja</div><div style="font-size:14px;color:#666;line-height:1.7;text-align:center;">Niniejszy materiał ma charakter wyłącznie edukacyjny i nie stanowi porady ani rekomendacji inwestycyjnej.</div></div></div>'
+    +'<div class="choices"><div class="choice-label">Co teraz?</div>'
+    +'<button class="choice-btn" onclick="restart()">🔄 Zagraj jeszcze raz</button>'
+    +'<button class="back-btn" onclick="goBack('+CHAPTER_COUNT+')">← Wróć do ostatniego rozdziału</button>'
+    +'<button onclick="var s=document.getElementById(\'src-list\');s.style.display=s.style.display===\'none\'?\'block\':\'none\'" style="background:#3B6D11;color:#fff;border:none;border-radius:12px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:6px;font-family:\'Segoe UI\',sans-serif;">📚 Źródła</button><div id="src-list" style="display:none;margin-top:8px;background:#EAF3DE;border:2px solid #3B6D11;border-radius:10px;padding:10px 14px;"><div style="font-size:12px;font-weight:700;color:#173404;margin-bottom:6px;">Bibliografia:</div><ul style="margin:0;padding-left:16px;font-size:12px;line-height:2;"><li><a href="https://betaetf.pl/jak-dziala-etf" target="_blank" style="color:#185FA5;">betaetf.pl — Jak działa ETF?</a></li><li><a href="https://inwestomat.eu/etf-accumulating-czy-etf-distributing/" target="_blank" style="color:#185FA5;">inwestomat.eu — ETF Accumulating czy Distributing?</a></li><li><a href="https://marciniwuc.com/etfy-akumulujace-vs-dystrybuujace/" target="_blank" style="color:#185FA5;">marciniwuc.com — ETF-y akumulujące vs dystrybuujące</a></li><li><a href="https://www.degiro.pl/wiedza-inwestycyjna/produkty/trackery/roznica-miedzy-akumulacyjnymi-i-dystrybucyjnymi-etf-ami" target="_blank" style="color:#185FA5;">degiro.pl — Różnica między ETF akumulacyjnym i dystrybucyjnym</a></li><li><a href="https://pl.wikipedia.org/wiki/Fundusz_ETF" target="_blank" style="color:#185FA5;">Wikipedia — Fundusz ETF</a></li><li><a href="https://www.analizy.pl/inwestowanie-pasywne/35641/co-to-jest-etf-zasady-dzialania-etf-ow" target="_blank" style="color:#185FA5;">analizy.pl — Co to jest ETF?</a></li><li><a href="https://www.gpw.pl/biblioteka-gpw-wiecej?gpwl_id=21&amp;title=ETF+czyli+kup+sobie+indeks+WIG20" target="_blank" style="color:#185FA5;">gpw.pl — ETF czyli kup sobie indeks WIG20</a></li><li><a href="https://www.bankier.pl/smart/sprawdz-jak-inwestowac-w-etf-poradnik-dla-poczatkujacych" target="_blank" style="color:#185FA5;">bankier.pl — Jak inwestować w ETF?</a></li><li><a href="https://www.xtb.com/pl/edukacja/co-to-jest-dywidenda" target="_blank" style="color:#185FA5;">xtb.com — Co to jest dywidenda?</a></li></ul></div>'
+    +'</div></div>';
+}
+
+function restart(){
+  portfolio=1000000;score=0;answers={};earnedBadges={};chapterSceneStep={};chapterShuffledChoices={};
+  renderIntro();
+}
+
+renderIntro();
+</script>
+</body>
+</html>
